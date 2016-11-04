@@ -15,4 +15,4 @@ python filecoder.py <file-path> <keystore-path> <key-id>
 > *<file-path> should end with* `.<key-id>.aes`
 
 ## Execution
-You will be asked for passphrase to key with provided `key-id` in keystore defined by `keystore_path`, during encoding to wrap key with it and during decoding to unwrap key with that passphrase.
+You will be asked for passphrase to key with provided `key-id` in keystore defined by `keystore_path`, during encoding to wrap key with it and during decoding to unwrap key with that passphrase.``

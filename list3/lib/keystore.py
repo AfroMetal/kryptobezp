@@ -33,8 +33,8 @@ class Keystore:
             print(f"OSError: file {self.key_id!s}.txt in keystore cannot be opened")
             return None
 
-    def save_key(self, mode_id, private_key):
-        key_oid = '.'.join([mode_id, self.key_id])
+    def save_key(self, private_key):
+        key_oid = '.'.join(['0', self.key_id])
         passphrase = getpass(f"\nEnter passphrase for key with id {self.key_id!s}: ")
         wrapped_key = PKCS8.wrap(private_key,
                                  key_oid,

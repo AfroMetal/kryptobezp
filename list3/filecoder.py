@@ -6,19 +6,12 @@ import lib.keystore as ks
 
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
-from Crypto.Util import Counter
 from Crypto.Util import Padding
 
-id2mode_var = {
-    '0': AES.MODE_CBC,
-    '1': AES.MODE_CTR,
-    '2': AES.MODE_GCM,
-}
-
-mode_str2id = {
-    'cbc': '0',
-    'ctr': '1',
-    'gcm': '2',
+string2mode = {
+    'cbc': AES.MODE_CBC,
+    'ctr': AES.MODE_CTR,
+    'gcm': AES.MODE_GCM,
 }
 
 sentinel = object()
@@ -26,20 +19,19 @@ keystore = None
 
 
 def encode(mode, file_path, output_path=sentinel):
-    mode_id = mode_str2id.get(mode)
-    cipher = aes_cipher(mode_id=mode_id)
+    cipher = aes_encoder(mode)
     output_path = '.'.join([file_path, keystore.key_id, 'aes']) if output_path is sentinel else output_path
     with codecs.open(file_path, mode='rb') as file:
-        encrypted = cipher.encrypt(file.read() if mode_id is not '0' else Padding.pad(file.read(), AES.block_size, style='iso7816'))
+        encrypted = cipher.encrypt(file.read() if mode != 'cbc' else Padding.pad(file.read(), AES.block_size, style='iso7816'))
     with codecs.open(output_path, mode='wb') as file:
-        file.write(encrypted)
+        file.write((cipher.iv if mode == 'cbc' else cipher.nonce) + encrypted)
 
 
-def decode(file_path):
-    cipher = aes_cipher()
+def decode(mode, file_path):
     with codecs.open(file_path, mode='rb') as file:
-        decrypted = cipher.decrypt(file.read())
-
+        file_bytes = file.read()
+        cipher = aes_decoder(mode, file_bytes[:16] if mode != 'ctr' else file_bytes[:8])
+        decrypted = cipher.decrypt(file_bytes[16:] if mode != 'ctr' else file_bytes[8:])
     with codecs.open(file_path.replace('.'.join(['', keystore.key_id, 'aes']), ''), mode='wb') as file:
         try:
             file.write(Padding.unpad(decrypted, AES.block_size, style='iso7816'))
@@ -47,64 +39,63 @@ def decode(file_path):
             file.write(decrypted)
 
 
-def aes_cipher(mode_id=sentinel):
-    if mode_id is sentinel:  # decode mode
-        args = decode_tuple()
-        return AES.new(args[0], mode=args[1], iv=args[2]) if args[3] is '0' \
-            else AES.new(args[0], mode=args[1], counter=Counter.new(64, args[2])) if args[3] is '1' \
-            else AES.new(args[0], mode=args[1], nonce=args[2])
-    else:  # encode mode
-        key = get_random_bytes(32)
-        if mode_id is '0':
-            iv = get_random_bytes(16)
-            keystore.save_key(mode_id, iv + b'-----' + key)
-            return AES.new(key, id2mode_var.get(str(mode_id)), iv=iv)
-        if mode_id is '1':
-            nonce = get_random_bytes(8)
-            counter = Counter.new(64, nonce)
-            keystore.save_key(mode_id, nonce + b'-----' + key)
-            return AES.new(key, id2mode_var.get(str(mode_id)), counter=counter)
-        if mode_id is '2':
-            nonce = get_random_bytes(16)
-            keystore.save_key(mode_id, nonce + b'-----' + key)
-            return AES.new(key, id2mode_var.get(str(mode_id)), nonce=nonce)
+def aes_encoder(mode):
+    key = get_random_bytes(32)
+    keystore.save_key(key)
+    if mode == 'cbc':
+        iv = get_random_bytes(16)
+        return AES.new(key, string2mode.get(mode), iv=iv)
+    if mode == 'ctr':
+        nonce = get_random_bytes(8)
+        return AES.new(key, string2mode.get(mode), nonce=nonce)
+    if mode == 'gcm':
+        nonce = get_random_bytes(16)
+        return AES.new(key, string2mode.get(mode), nonce=nonce)
 
 
-def decode_tuple():
+def aes_decoder(mode, nonce):
+    key = get_key()
+    if mode == 'cbc':
+        return AES.new(key, string2mode.get(mode), iv=nonce)
+    if mode == 'ctr':
+        return AES.new(key, string2mode.get(mode), nonce=nonce)
+    if mode == 'gcm':
+        return AES.new(key, string2mode.get(mode), nonce=nonce)
+
+
+def get_key():
     key_tuple = keystore.load_key()
     if key_tuple is None:
         sys.exit("File cannot be processed without key, program will now exit")
-    mode_id = key_tuple[0][:key_tuple[0].find('.')]
-    return key_tuple[1].partition(b'-----')[2], \
-        id2mode_var.get(mode_id), \
-        key_tuple[1].partition(b'-----')[0], mode_id
+    return key_tuple[1]
 
 
 def main():
-    if len(sys.argv) >= 4:
-        file_path = sys.argv[1]
-        keystore_path = sys.argv[2]
-        key_id = sys.argv[3]
-        mode = None
+    if len(sys.argv) >= 6:
+        file_path = sys.argv[2]
+        keystore_path = sys.argv[3]
+        key_id = sys.argv[4]
+        mode = sys.argv[5]
         output_path = None
-        if len(sys.argv) == 5:
-            mode = sys.argv[4]
-        if len(sys.argv) == 6:
-            mode = sys.argv[4]
-            output_path = sys.argv[5]
+        if len(sys.argv) == 7 and sys.argv[1] == 'encode':
+            output_path = sys.argv[6]
     else:
         print('\n'.join(["Provide all arguments",
-                         "   for encoding: <file_path> <keystore_path> <key_id> <mode in ('cbc', 'ctr', 'gcm')> "
+                         "-for encoding: encode <file_path> <keystore_path> <key_id> <mode in ('cbc', 'ctr', 'gcm')> "
                          "?<output_file>?",
-                         "   for decoding: <file_path> <keystore_path> <key_id>"]))
+                         "-for decoding: decode <file_path> <keystore_path> <key_id> <mode in ('cbc', 'ctr', 'gcm')>"]))
         return
 
     global keystore
     keystore = ks.Keystore(keystore_path.strip('"'), key_id)
-    decode(file_path) if mode is None \
-        else encode(mode, file_path) if output_path is None \
-        else encode(mode, file_path, output_path)
 
+    if sys.argv[1] == "encode":
+        encode(mode, file_path) if output_path is None else encode(mode, file_path, output_path)
+    elif sys.argv[1] == "decode":
+        decode(mode, file_path)
+    else:
+        print("\nFirst argument is invalid, accepted arguments are 'encode' and 'decode'")
+        return
 
 if __name__ == "__main__":
     main()
