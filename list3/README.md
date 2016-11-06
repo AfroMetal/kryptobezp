@@ -1,18 +1,33 @@
 # Kryptografia i bezpieczeństwo - List 3
-File coding/decoding with own keystore implementation. Program supports AES 
-standard with CBC, CTR and GCM modes. Keys, nonce/iv/counter are generated randomly and saved together with key in keystore as `.key` file encrypted using passphrase provided during execution according to [PKCS#8](https://www.wikiwand.com/en/PKCS_8) standard.  
-Program uses [PyCryptodome](http://pycryptodome.readthedocs.io/en/latest/src/introduction.html) library for all encrypting and decrypting operations with AES and to store keys securely in keystore with PKCS#8.
-# Usage
+File coding/decoding with cryptographic keys loaded from Java KeyStore in JCEKS keystore format `.jkc`. Program supports AES 
+standard with CBC, CTR and GCM modes. Nonce/iv/counter is generated randomly and saved in front of cryptogram.  
+Program uses [PyCryptodome](http://pycryptodome.readthedocs.io/en/latest/src/introduction.html) library for all encrypting and decrypting operations with AES.  
+For Java KeyStore parsing and decryption [PyJKS](http://pyjks.readthedocs.io/en/latest/) is used.
 
-## Run
+# Run
 ### Encode mode
-python filecoder.py \<file-path> \<keystore-path> \<key-id> \<mode (cbc|ctr|gcm)> [\<output-path>]
->*\<output-path> will be appended with* `.<key-id>.aes`.
+python filecoder.py \<file-path> \<keystore-path> \<key-alias> \<mode (cbc|ctr|gcm)> [\<output-path>]
+>*\<output-path> will be appended with* `.aes`.
 >*If none \<output-path> is provided it will default to <file-path>*
 
 ### Decode mode
-python filecoder.py \<file-path> \<keystore-path> \<key-id>
-> *\<file-path> should end with* `.<key-id>.aes`
+python filecoder.py \<file-path> \<keystore-path> \<key-alias>
+> *\<file-path> should end with* `.aes`
 
 ## Execution
-You will be asked for passphrase to key with provided `key-id` in keystore defined by `keystore_path`, during encoding to wrap key with it and during decoding to unwrap key with that passphrase.
+You will be asked for passphrase to Java KeyStore and key in keystore defined by `keystore_path`.
+
+#Usage examples
+```cmd
+C:\home\filecoder>python filecoder.py encode "C:\home\text.txt" "C:\home\keystore.jck" key1 cbc
+Enter passphrase for keystore:
+Enter passphrase for key:
+
+File was successfully encoded into C:\home\text.txt.aes
+
+C:\home\filecoder>python filecoder.py decode "C:\home\text.txt.aes" "C:\home\keystore.jck" key1 cbc
+Enter passphrase for keystore:
+Enter passphrase for key:
+
+File was successfully decoded into C:\home\text.txt
+```

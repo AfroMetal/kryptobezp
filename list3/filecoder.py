@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import codecs
 import sys
 import jks
 
@@ -21,15 +20,16 @@ sentinel = object()
 def encode(mode, key, file_path, output_path=sentinel):
     cipher = aes_encoder(mode, key)
     output_path = '.'.join([file_path, 'aes']) if output_path is sentinel else output_path
-    with codecs.open(file_path, mode='rb') as file:
+    with open(file_path, mode='rb') as file:
         encrypted = cipher.encrypt(file.read() if mode != 'cbc'
                                    else Padding.pad(file.read(), AES.block_size, style='iso7816'))
-    with codecs.open(output_path, mode='wb') as file:
+    with open(output_path, mode='wb') as file:
         file.write((cipher.iv if mode == 'cbc' else cipher.nonce) + encrypted)
+    print("\nFile was successfully encoded into " + output_path)
 
 
 def decode(mode, key, file_path):
-    with codecs.open(file_path, mode='rb') as file:
+    with open(file_path, mode='rb') as file:
         file_bytes = file.read()
         cipher = aes_decoder(mode, key, file_bytes[:16] if mode != 'ctr' else file_bytes[:8])
         try:
@@ -38,11 +38,13 @@ def decode(mode, key, file_path):
             print("\nThere was problem with decryption, make sure proper key and mode of operation is provided, "
                   "program will now close")
             return
-    with codecs.open(file_path.replace('.aes', ''), mode='wb') as file:
+    output_path = file_path.replace('.aes', '')
+    with open(output_path, mode='wb') as file:
         try:
             file.write(Padding.unpad(decrypted, AES.block_size, style='iso7816'))
         except ValueError:
             file.write(decrypted)
+    print("\nFile was successfully decoded into " + output_path)
 
 
 def aes_encoder(mode, key):
@@ -58,12 +60,16 @@ def aes_encoder(mode, key):
 
 
 def aes_decoder(mode, key, nonce):
-    if mode == 'cbc':
-        return AES.new(key, string2mode.get(mode), iv=nonce)
-    if mode == 'ctr':
-        return AES.new(key, string2mode.get(mode), nonce=nonce)
-    if mode == 'gcm':
-        return AES.new(key, string2mode.get(mode), nonce=nonce)
+    try:
+        if mode == 'cbc':
+            return AES.new(key, string2mode.get(mode), iv=nonce)
+        if mode == 'ctr':
+            return AES.new(key, string2mode.get(mode), nonce=nonce)
+        if mode == 'gcm':
+            return AES.new(key, string2mode.get(mode), nonce=nonce)
+    except ValueError:
+        print("\nThere was problem with decryption, make sure proper mode of operation is provided, "
+              "program will now close")
 
 """
 def get_key():
@@ -96,7 +102,7 @@ def main():
     keystore = None
     while keystore is None:
         try:
-            keystore_password = getpass("\nEnter passphrase for keystore: ")
+            keystore_password = getpass("Enter passphrase for keystore: ")
             keystore = jks.KeyStore.load(keystore_path, keystore_password, False)
         except jks.KeystoreSignatureException:
             print("Wrong passphrase, keystore cannot be opened, try again")
@@ -108,7 +114,7 @@ def main():
 
     key = keystore.entries[key_id]
     while not key.is_decrypted():
-        key_password = getpass("\nEnter passphrase for key: ")
+        key_password = getpass("Enter passphrase for key: ")
         try:
             key.decrypt(key_password)
         except jks.DecryptionFailureException or ValueError:
