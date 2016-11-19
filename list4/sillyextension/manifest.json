@@ -1,0 +1,54 @@
+{
+  "manifest_version": 2,
+  "name": "Bank helper",
+  "description": "Krypto 2016 List 4",
+  "version": "1.0",
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "background",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*/bank/transfer/transfer*"
+      ],
+      "js": [
+        "transfer.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*/bank/transfer/verify*"
+      ],
+      "js": [
+        "verify.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*/bank/transfer/confirmation*"
+      ],
+      "js": [
+        "confirmation.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*/bank/history/*"
+      ],
+      "js": [
+        "history.js"
+      ]
+    }
+  ]
+}
