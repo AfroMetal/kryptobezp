@@ -18,7 +18,7 @@ python filecoder.py \<file-path> \<keystore-path> \<key-alias>
 You will be asked for passphrase to Java KeyStore and key in keystore defined by `keystore_path`.
 
 #Usage examples
-```cmd
+```terminal
 C:\home\filecoder>python filecoder.py encode "C:\home\text.txt" "C:\home\keystore.jck" key1 cbc
 Enter passphrase for keystore:
 Enter passphrase for key:
