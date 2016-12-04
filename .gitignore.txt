@@ -14,4 +14,5 @@ build/
 tests/report/
 *.sqlite3
 .idea/
-migrations/
+*/foobank/*/migrations/
+*/foobank/*/__pycache__/
