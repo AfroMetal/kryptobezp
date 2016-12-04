@@ -1,0 +1,25 @@
+https://datacenteroverlords.com/2012/03/01/creating-your-own-ssl-certificate-authority/
+
+#################################################
+
+openssl genrsa -out rootCA.key 2048
+
+openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.pem
+
+openssl genrsa -out foobank.key 2048
+
+openssl req -new -key foobank.key -out foobank.csr
+
+openssl x509 -req -in foobank.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out foobank.crt -days 500 -sha256
+
+#################################################
+
+hosts.txt:
+
+127.0.0.1 localhost foo.bank.pl
+
+#################################################
+
+python manage.py runsslserver foo.bank.pl:8000 --cert "C:\Users\radek\.ssl\foobank.crt" --key "C:\Users\radek\.ssl\foobank.key"
+
+#################################################
