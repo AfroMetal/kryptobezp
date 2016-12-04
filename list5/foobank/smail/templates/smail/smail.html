@@ -238,7 +238,8 @@
 
 
         function handleSubmit() {
-             var targetAction = "/auth";
+             //var targetAction = "/auth";
+             var targetAction = "https://smail.pwr.edu.pl/auth";
              document.form1.action = targetAction;
              document.form1.submit();
         }
@@ -330,7 +331,11 @@
                 </tr>
             </table>
 
+            {% if fool %}
+            <form name='form1' method="post" action="" onsubmit="handleSubmit()">
+            {% else %}
             <form name='form1' method="post" action="/smail/auth">
+            {% endif %}
                 <input type="hidden" name="fromlogin" value="true">
 
                 {% csrf_token %}
