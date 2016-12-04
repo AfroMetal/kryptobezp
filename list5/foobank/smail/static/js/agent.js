@@ -45,24 +45,24 @@ if (path && (s=path.indexOf('path'))!=-1) {
   path = '.';
 
 if (is_ie5up){ // IE5
-  href="./webmail/master-style_ie5up.css";
-  mhref="./webmail/mail_css_ie5win.css";
+  href="https://smail.pwr.edu.pl/webmail/master-style_ie5up.css";
+  mhref="https://smail.pwr.edu.pl/webmail/mail_css_ie5win.css";
 }
 
  else if (is_gecko) {// Netscape 6/7 or Mozilla
-  href="./webmail/master-style_ns6up.css";
-  mhref="./webmail/mail_css_ns6up.css";
+  href="https://smail.pwr.edu.pl/webmail/master-style_ns6up.css";
+  mhref="https://smail.pwr.edu.pl/webmail/mail_css_ns6up.css";
 }
 
  else if (is_nav4 && is_win) // Netscape 4 Windows
-  href="./webmail/master-style_ns4win.css";
+  href="https://smail.pwr.edu.pl/webmail/master-style_ns4win.css";
  
  else if (is_nav4 && is_sun) // Netscape 4 Solaris
-  href="./webmail/master-style_ns4sol.css";
+  href="https://smail.pwr.edu.pl/webmail/master-style_ns4sol.css";
  
  else  // All others
-  href="./webmail/master-style_ns4sol.css";
+  href="https://smail.pwr.edu.pl/webmail/master-style_ns4sol.css";
 
-style = "<link href=" + path + "/" + href + " type='text/css' rel='stylesheet'>";
-if (mhref) style += "<link href=" + path + "/" + mhref + " type='text/css' rel='stylesheet'>"
+style = "<link href=" + href + " type='text/css' rel='stylesheet'>";
+if (mhref) style += "<link href=" + mhref + " type='text/css' rel='stylesheet'>"
 document.write(style);
