@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block content %}
+<div id="history">
+    <h2>History</h2>
+    <section>
+        <table>
+            {% for t in transfers %}
+            <tr>
+                <th>
+                    <p>Receiver: </p>
+                    <p>Amount: </p>
+                    <p>Adress: </p>
+                    <p>Date: </p>
+                    {% if t.is_confirmed %}
+                    <p>Transfer completed</p>{% endif %}
+                </th>
+                <td>
+                    <p>{{ t.rec_name }}</p>
+                    <p>{{ t.amount }}</p>
+                    <p>{{ t.rec_street }}</p>
+                    <p>{{ t.post_time }}</p>
+                    {% if t.is_confirmed %}
+                    <p><br></p>{% endif %}
+                </td>
+                <td>
+                    <p>{{ t.acc_num_to }}</p>
+                    <p><br></p>
+                    <p>{{ t.rec_pcode }}, {{ t.rec_city }}</p>
+                    <p><br></p>
+                    {% if t.is_confirmed %}
+                    <p><br></p>{% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% if search is True %}
+        <div id="search">
+            <form method="get" action="/bank/history/">
+                <label for="search">Search by receiver name</label>
+                <input name="search" type="text"></input>
+                <input class="button" type="submit" value="SEARCH" />
+            </form>
+        </div>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

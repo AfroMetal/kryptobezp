@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div id="transfer">
+        <h2>Transfer</h2>
+        <form method="get" action="/bank/transfer/verify">
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input class="button" type="submit" value="NEXT"/>
+        </form>
+    </div>
+{% endblock %}

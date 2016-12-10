@@ -1,0 +1,98 @@
+HTTP/1.1 200 OK
+Date: Wed, 07 Dec 2016 21:09:03 GMT
+Server: WSGIServer/0.2 CPython/3.5.2
+Content-Type: text/html; charset=utf-8
+Expires: Wed, 07 Dec 2016 21:09:03 GMT
+Vary: Cookie
+X-Frame-Options: SAMEORIGIN
+Cache-Control: must-revalidate, max-age=0, no-cache, no-store
+Last-Modified: Wed, 07 Dec 2016 21:09:03 GMT
+Set-Cookie: csrftoken=nMExNClyo9yNEUN0hkiXeChmR1RCkyI9kvcyJUpUZpK91ctLLNdernIXN89my18c; expires=Wed, 06-Dec-2017 21:09:03 GMT; Max-Age=31449600; Path=/
+
+<!DOCTYPE html>
+
+<html lang="en-US" >
+<head>
+<title>Log in | Django site admin</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.ba3dc2f88fc5.css" />
+<link rel="stylesheet" type="text/css" href="/static/admin/css/login.a846c0e2ef65.css" />
+
+
+
+
+<meta name="robots" content="NONE,NOARCHIVE" />
+</head>
+
+
+<body class=" login"
+  data-admin-utc-offset="3600">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+
+        </div>
+        
+        
+    </div>
+    <!-- END Header -->
+    
+    
+
+    
+        
+    
+
+    <!-- Content -->
+    <div id="content" class="colM">
+        
+        
+        
+
+<p class="errornote">
+Please correct the error below.
+</p>
+
+
+
+
+<div id="content-main">
+
+
+
+<form action="/admin/login/" method="post" id="login-form"><input type='hidden' name='csrfmiddlewaretoken' value='23xbVFFMeMNViVVmZ3KnXIK7lEwmOYlFZM5cRXJ8P2ZhFdB7twFEatbIhLO62rLI' />
+  <div class="form-row">
+    <ul class="errorlist"><li>This field is required.</li></ul>
+    <label class="required" for="id_username">Username:</label> <input autofocus="" id="id_username" maxlength="254" name="username" type="text" required />
+  </div>
+  <div class="form-row">
+    
+    <label class="required" for="id_password">Password:</label> <input id="id_password" name="password" type="password" required />
+    <input type="hidden" name="next" value="/admin/" />
+  </div>
+  
+  
+  <div class="submit-row">
+    <label>&nbsp;</label><input type="submit" value="Log in" />
+  </div>
+</form>
+
+</div>
+
+        
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>

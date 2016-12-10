@@ -1,0 +1,4 @@
+var child = [
+  { 'dupe': false, 'type': 64, 'name': 'csrfmiddlewaretoken=ZJWrgv7ayGQtZNL9V68oFcqxURcZUpLNWsuscNbw9W2Pm5rUpz3FSXR8QYuJ8SbQ', 'dir': 'c0', 'linked': 5, 'url': 'http://127.0.0.1:8000/login/ DATA:csrfmiddlewaretoken=ZJWrgv7ayGQtZNL9V68oFcqxURcZUpLNWsuscNbw9W2Pm5rUpz3FSXR8QYuJ8SbQ&password=skipfish', 'fetched': true, 'code': 200, 'len': 1265, 'decl_mime': 'text/html', 'sniff_mime': '[none]', 'cset': 'utf-8', 'missing': false, 'csens': false, 'child_cnt': 0, 'issue_cnt': [ 1, 0, 0, 0, 0 ], 'sig': 0xffbed5cd },
+  { 'dupe': false, 'type': 64, 'name': 'password=skipfish', 'dir': 'c1', 'linked': 5, 'url': 'http://127.0.0.1:8000/login/ DATA:csrfmiddlewaretoken=ZJWrgv7ayGQtZNL9V68oFcqxURcZUpLNWsuscNbw9W2Pm5rUpz3FSXR8QYuJ8SbQ&password=skipfish', 'fetched': true, 'code': 200, 'len': 1265, 'decl_mime': 'text/html', 'sniff_mime': '[none]', 'cset': 'utf-8', 'missing': false, 'csens': false, 'child_cnt': 0, 'issue_cnt': [ 1, 0, 0, 0, 0 ], 'sig': 0xffbed5cd }
+];

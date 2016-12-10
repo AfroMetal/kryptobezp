@@ -1,0 +1,48 @@
+HTTP/1.1 200 OK
+Date: Wed, 07 Dec 2016 22:16:35 GMT
+Server: WSGIServer/0.2 CPython/3.5.2
+Content-Type: text/html; charset=utf-8
+Expires: Wed, 07 Dec 2016 22:16:35 GMT
+Vary: Cookie
+X-Frame-Options: SAMEORIGIN
+Cache-Control: must-revalidate, max-age=0, no-cache, no-store
+Last-Modified: Wed, 07 Dec 2016 22:16:35 GMT
+Set-Cookie: csrftoken=nMExNClyo9yNEUN0hkiXeChmR1RCkyI9kvcyJUpUZpK91ctLLNdernIXN89my18c; expires=Wed, 06-Dec-2017 22:16:35 GMT; Max-Age=31449600; Path=/
+
+
+<html>
+
+<head>
+    <title>Login - FooBank</title>
+    <link rel="stylesheet" href="/static/css/style.8a4502159764.css">
+</head>
+
+<body>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                
+                <p>Your username and password didn't match. Please try again.</p>
+                 
+
+                <form method="post" action="/login/">
+                    <input type='hidden' name='csrfmiddlewaretoken' value='HLMluwZkPeiDpSzHvJFTInw9HywyFh0DEukmqO3GquuZMafsZcAaV8XKDFOiTKqG' />
+                    <table>
+                        <tr>
+                            <td><label for="id_username">Username:</label></td>
+                            <td><input autofocus="" id="id_username" maxlength="254" name="username" type="text" required /></td>
+                        </tr>
+                        <tr>
+                            <td><label for="id_password">Password:</label></td>
+                            <td><input id="id_password" name="password" type="password" required /></td>
+                        </tr>
+                    </table>
+
+                    <input type="submit" value="LOGIN" />
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

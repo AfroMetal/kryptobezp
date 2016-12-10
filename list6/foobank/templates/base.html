@@ -1,0 +1,23 @@
+{% load static %}
+<html>
+<head>
+    <title>FooBank</title>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+</head>
+<body>
+<header>
+    <h1><a href="/bank">FooBank</a></h1>
+    <a href="/bank/transfer/transfer">transfer</a>
+    <a href="/bank/history">history</a>
+    <a href="{% url 'logout' %}?next=/login">logout</a>
+</header>
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

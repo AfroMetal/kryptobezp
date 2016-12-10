@@ -1,0 +1,36 @@
+GET http://127.0.0.1:8000/ name=http://127.0.0.1:8000/ type=serv linked=yes browsers=1 browser_used=FAST dup=0 code=404 len=74 notes=5 sig=0x51bb92b5
+GET http://127.0.0.1:8000/accounts/ name=accounts type=dir linked=yes browsers=1 browser_used=FAST dup=0 returns_404 code=404 len=83 notes=2 sig=0xfe00b6ed
+GET http://127.0.0.1:8000/accounts/login/ name=login type=dir linked=yes browsers=1 browser_used=FAST dup=0 returns_404 code=404 len=89 notes=2 sig=0x318aaa4d
+GET http://127.0.0.1:8000/accounts/login/?next=/bank/ name=next type=param linked=yes browsers=1 browser_used=FAST dup=0 returns_404 code=404 len=89 notes=1 sig=0xffbed5cd
+GET http://127.0.0.1:8000/admin/ name=admin type=dir linked=yes browsers=1 browser_used=FAST dup=0 code=302 len=0 notes=2 sig=0x557c6c0a
+GET http://127.0.0.1:8000/admin/auth/ name=auth type=dir linked=no browsers=1 browser_used=FAST dup=0 code=302 len=0 notes=3 sig=0x1f1491b
+GET http://127.0.0.1:8000/admin/auth/group/ name=group type=dir linked=no browsers=1 browser_used=FAST dup=0 code=302 len=0 notes=4 sig=0xfff80501
+GET http://127.0.0.1:8000/admin/auth/user/ name=user type=dir linked=no browsers=1 browser_used=FAST dup=1 code=302 len=0 notes=4 sig=0xfff80501
+GET http://127.0.0.1:8000/admin/bank/ name=bank type=dir linked=no browsers=1 browser_used=FAST dup=0 code=302 len=0 notes=3 sig=0xfff936eb
+GET http://127.0.0.1:8000/admin/login/ name=login type=dir linked=yes browsers=1 browser_used=FAST dup=0 code=200 len=1669 notes=4 sig=0x7d91348c
+POST http://127.0.0.1:8000/admin/login/ DATA:csrfmiddlewaretoken=dF79Os4UykZSOEtfsxpKv4ZHRRlCEon7aoFaKK8g9AbebW90W0k1IPqiNYDmSRNa&password=skipfish&next=/admin/ name=csrfmiddlewaretoken type=param linked=yes browsers=1 browser_used=FAST dup=0 code=200 len=1788 notes=1 sig=0xffbed5cd
+GET http://127.0.0.1:8000/admin/login/?next=/admin/ name=next type=param linked=yes browsers=1 browser_used=FAST dup=0 code=200 len=1682 notes=1 sig=0xffbed5cd
+POST http://127.0.0.1:8000/admin/login/ DATA:csrfmiddlewaretoken=dF79Os4UykZSOEtfsxpKv4ZHRRlCEon7aoFaKK8g9AbebW90W0k1IPqiNYDmSRNa&password=skipfish&next=/admin/ name=password type=param linked=yes browsers=1 browser_used=FAST dup=0 code=200 len=1788 notes=2 sig=0xffbd871a
+GET http://127.0.0.1:8000/admin/logout/ name=logout type=dir linked=no browsers=1 browser_used=FAST dup=1 code=302 len=0 notes=3 sig=0xfff936eb
+GET http://127.0.0.1:8000/static/ name=static type=dir linked=yes browsers=1 browser_used=FAST dup=0 returns_404 code=404 len=81 notes=2 sig=0xe50e877b
+GET http://127.0.0.1:8000/static/admin/ name=admin type=dir linked=yes browsers=1 browser_used=FAST dup=0 returns_404 code=404 len=87 notes=2 sig=0xfdd0b6ea
+GET http://127.0.0.1:8000/static/admin/css/ name=css type=dir linked=yes browsers=1 browser_used=FAST dup=0 returns_404 code=404 len=91 notes=2 sig=0x1f3490f
+GET http://127.0.0.1:8000/static/admin/css/base.ba3dc2f88fc5.css name=base.ba3dc2f88fc5.css type=file linked=yes browsers=1 browser_used=FAST dup=0 code=200 len=16102 notes=4 sig=0x746fd631
+GET http://127.0.0.1:8000/static/admin/css/login.a846c0e2ef65.css name=login.a846c0e2ef65.css type=file linked=yes browsers=1 browser_used=FAST dup=0 code=200 len=1203 notes=4 sig=0x746fd631
+GET http://127.0.0.1:8000/static/admin/img/ name=img type=dir linked=maybe browsers=1 browser_used=FAST dup=0 returns_404 code=404 len=91 notes=2 sig=0xa178804f
+GET http://127.0.0.1:8000/static/admin/img/icon-addlink.d519b3bab011.svg name=icon-addlink.d519b3bab011.svg type=file linked=maybe browsers=1 browser_used=FAST dup=0 code=200 len=331 notes=3 sig=0xfff49f6a
+GET http://127.0.0.1:8000/static/admin/img/icon-alert.034cc7d8a67f.svg name=icon-alert.034cc7d8a67f.svg type=file linked=maybe browsers=1 browser_used=FAST dup=0 code=200 len=504 notes=3 sig=0xfff49f6a
+GET http://127.0.0.1:8000/static/admin/img/icon-changelink.18d2fd706348.svg name=icon-changelink.18d2fd706348.svg type=file linked=maybe browsers=1 browser_used=FAST dup=0 code=200 len=380 notes=3 sig=0xfff49f6a
+GET http://127.0.0.1:8000/static/admin/img/icon-deletelink.564ef9dc3854.svg name=icon-deletelink.564ef9dc3854.svg type=file linked=maybe browsers=1 browser_used=FAST dup=0 code=200 len=392 notes=3 sig=0xfff49f6a
+GET http://127.0.0.1:8000/static/admin/img/icon-no.439e821418cd.svg name=icon-no.439e821418cd.svg type=file linked=maybe browsers=1 browser_used=FAST dup=0 code=200 len=560 notes=3 sig=0xfff49f6a
+GET http://127.0.0.1:8000/static/admin/img/icon-yes.d2f9f035226a.svg name=icon-yes.d2f9f035226a.svg type=file linked=maybe browsers=1 browser_used=FAST dup=1 code=200 len=436 notes=3 sig=0xfff49f6a
+GET http://127.0.0.1:8000/static/admin/img/sorting-icons.3a097b59f104.svg name=sorting-icons.3a097b59f104.svg type=file linked=maybe browsers=1 browser_used=FAST dup=0 code=200 len=1097 notes=3 sig=0xfff49f6a
+GET http://127.0.0.1:8000/static/admin/img/tooltag-add.e59d620a9742.svg name=tooltag-add.e59d620a9742.svg type=file linked=maybe browsers=1 browser_used=FAST dup=1 code=200 len=331 notes=3 sig=0xfff49f6a
+GET http://127.0.0.1:8000/static/admin/img/tooltag-arrowright.bbfb788a849e.svg name=tooltag-arrowright.bbfb788a849e.svg type=file linked=maybe browsers=1 browser_used=FAST dup=1 code=200 len=280 notes=3 sig=0xfff49f6a
+GET http://127.0.0.1:8000/static/css/ name=css type=dir linked=yes browsers=1 browser_used=FAST dup=0 returns_404 code=404 len=85 notes=2 sig=0xf7be2666
+GET http://127.0.0.1:8000/static/css/style.8a4502159764.css name=style.8a4502159764.css type=file linked=yes browsers=1 browser_used=FAST dup=0 code=200 len=748 notes=4 sig=0x746fd631
+GET http://127.0.0.1:8000/bank name=bank type=pathinfo linked=yes browsers=1 browser_used=FAST dup=0 code=302 len=0 notes=1 sig=0xffeed5cd
+GET http://127.0.0.1:8000/login name=login type=pathinfo linked=yes browsers=1 browser_used=FAST dup=0 code=200 len=1166 notes=2 sig=0x20e1ba36
+POST http://127.0.0.1:8000/login/ DATA:csrfmiddlewaretoken=ZJWrgv7ayGQtZNL9V68oFcqxURcZUpLNWsuscNbw9W2Pm5rUpz3FSXR8QYuJ8SbQ&password=skipfish name=csrfmiddlewaretoken type=param linked=yes browsers=1 browser_used=FAST dup=0 code=200 len=1265 notes=1 sig=0xffbed5cd
+POST http://127.0.0.1:8000/login/ DATA:csrfmiddlewaretoken=ZJWrgv7ayGQtZNL9V68oFcqxURcZUpLNWsuscNbw9W2Pm5rUpz3FSXR8QYuJ8SbQ&password=skipfish name=password type=param linked=yes browsers=1 browser_used=FAST dup=0 code=200 len=1265 notes=1 sig=0xffbed5cd
+GET http://127.0.0.1:8000/logout name=logout type=pathinfo linked=no browsers=1 browser_used=FAST dup=0 code=200 len=1026 notes=2 sig=0xffeed5cd

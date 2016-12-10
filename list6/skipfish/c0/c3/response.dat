@@ -1,0 +1,8 @@
+HTTP/1.1 302 Found
+Date: Wed, 07 Dec 2016 18:00:57 GMT
+Server: WSGIServer/0.2 CPython/3.5.2
+Content-Type: text/html; charset=utf-8
+X-Frame-Options: SAMEORIGIN
+Location: /accounts/login/?next=/bank/
+Vary: Cookie
+

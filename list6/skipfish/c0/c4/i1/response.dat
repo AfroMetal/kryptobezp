@@ -1,0 +1,26 @@
+HTTP/1.1 200 OK
+Date: Wed, 07 Dec 2016 22:16:35 GMT
+Server: WSGIServer/0.2 CPython/3.5.2
+Content-Type: text/html; charset=utf-8
+Expires: Wed, 07 Dec 2016 22:16:35 GMT
+Vary: Cookie
+X-Frame-Options: SAMEORIGIN
+Cache-Control: must-revalidate, max-age=0, no-cache, no-store
+Last-Modified: Wed, 07 Dec 2016 22:16:35 GMT
+Set-Cookie: csrftoken=nMExNClyo9yNEUN0hkiXeChmR1RCkyI9kvcyJUpUZpK91ctLLNdernIXN89my18c; expires=Wed, 06-Dec-2017 22:16:35 GMT; Max-Age=31449600; Path=/
+
+
+<html>
+
+<head>
+    <title>Login - FooBank</title>
+    <link rel="stylesheet" href="/static/css/style.8a4502159764.css">
+</head>
+
+<body>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                 
+
+                <form method="post" action="/login/"

@@ -1,0 +1,11 @@
+w? 1 0 0 svg
+w? 1 0 0 icon-changelink
+w? 1 0 0 icon-alert
+w? 1 0 0 icon-yes
+w? 1 0 0 tooltag-arrowright
+w? 1 0 0 icon-addlink
+w? 2 1 0 127
+w? 1 0 0 icon-no
+w? 1 0 0 sorting-icons
+w? 1 0 0 icon-deletelink
+w? 1 0 0 tooltag-add

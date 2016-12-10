@@ -1,0 +1,72 @@
+HTTP/1.1 200 OK
+Date: Wed, 07 Dec 2016 18:05:31 GMT
+Server: WSGIServer/0.2 CPython/3.5.2
+Content-Type: text/html; charset=utf-8
+Expires: Wed, 07 Dec 2016 18:05:31 GMT
+Vary: Cookie
+X-Frame-Options: SAMEORIGIN
+Cache-Control: must-revalidate, max-age=0, no-cache, no-store
+Last-Modified: Wed, 07 Dec 2016 18:05:31 GMT
+
+<!DOCTYPE html>
+
+<html lang="en-US" >
+<head>
+<title>Logged out | Django site admin</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.ba3dc2f88fc5.css" />
+
+
+
+<meta name="robots" content="NONE,NOARCHIVE" />
+</head>
+
+
+<body class=""
+  data-admin-utc-offset="3600">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+
+        </div>
+        
+        
+        
+        
+    </div>
+    <!-- END Header -->
+    <div class="breadcrumbs"><a href="/admin/">Home</a></div>
+    
+
+    
+        
+    
+
+    <!-- Content -->
+    <div id="content" class="colM">
+        
+        <h1>Logged out</h1>
+        
+
+<p>Thanks for spending some quality time with the Web site today.</p>
+
+<p><a href="/admin/">Log in again</a></p>
+
+
+        
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>

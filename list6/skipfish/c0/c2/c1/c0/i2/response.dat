@@ -1,0 +1,65 @@
+HTTP/1.1 200 OK
+Date: Wed, 07 Dec 2016 22:16:35 GMT
+Server: WSGIServer/0.2 CPython/3.5.2
+Last-Modified: Wed, 07 Dec 2016 17:59:16 GMT
+Content-Type: text/css; charset="utf-8"
+Cache-Control: public, max-age=315360000
+Access-Control-Allow-Origin: *
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Length: 298
+
+body {
+    background-color: antiquewhite;
+    margin: 0;
+}
+
+header {
+    padding: 20px 5%;
+    background-color: darkgoldenrod;
+}
+
+a {
+    text-decoration: none;
+    color: antiquewhite;
+}
+
+a:hover {
+    color: goldenrod;
+}
+
+table {
+    border: 1px solid antiquewhite;
+    border-collapse: collapse;
+    margin: auto;
+    color: whitesmoke;
+}
+
+input {
+    display: inline-block;
+}
+
+th {
+    text-align: right;
+}
+
+th, td {
+    padding: 5px;
+    border-bottom: 1px solid antiquewhite;
+}
+
+.button {
+    display: block;
+    margin: auto;
+    width: 80%;
+    padding: 10px 0;
+}
+
+.content {
+    width: 80%;
+    margin: 0 auto;
+    padding: 2%;
+    background-color: goldenrod;
+    color: whitesmoke;
+}rm>
+  ±

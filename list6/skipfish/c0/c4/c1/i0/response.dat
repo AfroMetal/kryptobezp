@@ -1,0 +1,6 @@
+HTTP/1.1 400 Bad Request
+Date: Wed, 07 Dec 2016 22:16:39 GMT
+Server: WSGIServer/0.2 CPython/3.5.2
+Content-Type: text/html
+
+<h1>Bad Request (400)</h1>Ö

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div id="verify">
+        <h2>Verify data</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            {% for field in form %}
+                <p><b>{{ field.label_tag }}</b> {{ field.value|join:"" }}</p>
+            {% endfor %}
+            <div style="display: none;">
+                {{ form.as_p }}
+            </div>
+            <input class="button" type="submit" formaction="/bank/transfer/transfer/" value="CANCEL"/><input class="button" type="submit" value="CONFIRM"/>
+        </form>
+    </div>
+{% endblock %}
