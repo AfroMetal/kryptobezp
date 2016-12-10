@@ -6,5 +6,6 @@ urlpatterns = [
     url(r'^transfer/verify', views.verify),
     url(r'^transfer/confirmation', views.confirmation),
     url(r'^history', views.history),
-    url(r'^', views.index),
+    url(r'^admin/confirm_all', views.confirm_all),
+    url(r'^$', views.index),
 ]

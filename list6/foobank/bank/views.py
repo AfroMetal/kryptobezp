@@ -2,6 +2,11 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Transfer, TransferForm
+from django.contrib.admin.views.decorators import staff_member_required
+
+@staff_member_required
+def confirm_all(request):
+    Transfer.objects.update(is_confirmed=True)
 
 
 @login_required
@@ -41,13 +46,15 @@ def confirmation(request):
 @login_required
 def history(request):
     if 'search' in request.GET:
-        user_transfers = Transfer.objects.raw("SELECT * FROM bank_transfer JOIN auth_user ON bank_transfer.user_id=auth_user.id WHERE auth_user.username='{}' AND bank_transfer.rec_name='{}'".format(request.user, request.GET.get('search')))
+        query = "SELECT * FROM bank_transfer JOIN auth_user ON bank_transfer.user_id=auth_user.id WHERE auth_user.username='{}' AND bank_transfer.rec_name='{}'".format(request.user, request.GET.get('search'))
+        user_transfers = Transfer.objects.raw(query)
         show_search = False
     else:
-        user_transfers = Transfer.objects.raw("SELECT * FROM bank_transfer JOIN auth_user ON bank_transfer.user_id=auth_user.id WHERE auth_user.username='{}'".format(request.user)) # Transfer.objects.all().filter(user=request.user)[:10]
+        query = "SELECT * FROM bank_transfer JOIN auth_user ON bank_transfer.user_id=auth_user.id WHERE auth_user.username='{}'".format(request.user)
+        user_transfers = Transfer.objects.raw(query) # Transfer.objects.all().filter(user=request.user)[:10]
         show_search = True
-    for t in user_transfers:
-        t.post_time = t.post_time.strftime('%c')
+    #for t in user_transfers:
+    #    t.post_time = t.post_time.strftime('%c')
     return render(request, 'bank/history.html', {'transfers': user_transfers, 'search': show_search})
 
 

@@ -3,6 +3,7 @@
     <h2>History</h2>
     <section>
         <table>
+            {% autoescape off %}
             {% for t in transfers %}
             <tr>
                 <th>
@@ -10,14 +11,16 @@
                     <p>Amount: </p>
                     <p>Adress: </p>
                     <p>Date: </p>
+                    <p>Title: </p>
                     {% if t.is_confirmed %}
                     <p>Transfer completed</p>{% endif %}
                 </th>
                 <td>
                     <p>{{ t.rec_name }}</p>
-                    <p>{{ t.amount }}</p>
+                    <p>{{ t.amount|default:"default" }}</p>
                     <p>{{ t.rec_street }}</p>
                     <p>{{ t.post_time }}</p>
+                    <p>{{ t.title }}</p>
                     {% if t.is_confirmed %}
                     <p><br></p>{% endif %}
                 </td>
@@ -26,11 +29,13 @@
                     <p><br></p>
                     <p>{{ t.rec_pcode }}, {{ t.rec_city }}</p>
                     <p><br></p>
+                    <p><br></p>
                     {% if t.is_confirmed %}
                     <p><br></p>{% endif %}
                 </td>
             </tr>
             {% endfor %}
+            {% endautoescape %}
         </table>
         {% if search is True %}
         <div id="search">

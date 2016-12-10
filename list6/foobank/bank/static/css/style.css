@@ -51,3 +51,7 @@ th, td {
     background-color: goldenrod;
     color: whitesmoke;
 }
+
+#search input {
+  width: 100%;
+}
