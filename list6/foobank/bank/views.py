@@ -3,10 +3,20 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Transfer, TransferForm
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.decorators.http import require_POST
 
+
+@require_POST
 @staff_member_required
 def confirm_all(request):
     Transfer.objects.update(is_confirmed=True)
+    return render(request, 'bank/index.html', {'user': request.user})
+
+
+@staff_member_required
+def confirm_low(request):
+    Transfer.objects.filter(amount<10).update(is_confirmed=True)
+    return render(request, 'bank/index.html', {'user': request.user})
 
 
 @login_required
