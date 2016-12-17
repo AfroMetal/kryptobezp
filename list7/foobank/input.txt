@@ -1,0 +1,1 @@
+python manage.py runsslserver foo.bank.pl:8000 --cert "C:\Users\radek\.ssl\foobank.crt" --key "C:\Users\radek\.ssl\foobank.key"
