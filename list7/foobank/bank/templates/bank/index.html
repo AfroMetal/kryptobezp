@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+{% load account %}
 
 {% block content %}
 <div id="main">
-    <h2>Hello, {{ user }}</h2>
+    <h2>Hello, {% user_display user %}</h2>
 </div>
 {% endblock %}

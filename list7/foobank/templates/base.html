@@ -1,15 +1,19 @@
 {% load static %}
+{% load recaptcha2 %}
 <html>
 <head>
     <title>FooBank</title>
     <link rel="stylesheet" href="{% static "css/style.css" %}">
+    {% recaptcha_init %}
 </head>
 <body>
 <header>
     <h1><a href="/bank">FooBank</a></h1>
+    {% if '/bank' in request.path %}
     <a href="/bank/transfer/transfer">transfer</a>
     <a href="/bank/history">history</a>
-    <a href="{% url 'logout' %}?next=/login">logout</a>
+    <a href="{% url 'logout' %}?next=/accounts/login/">logout</a>
+    {% endif %}
 </header>
 <div class="content container">
     <div class="row">
