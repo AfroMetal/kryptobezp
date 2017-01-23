@@ -4,14 +4,32 @@ from Crypto.IO import PEM
 from Crypto.PublicKey import RSA
 from Crypto.Util import number
 
-from list8 import common
-from list8 import rsa_int
+import common
+import rsa_int
 
 log = logging.getLogger(__name__)
 EXPONENT = 65537
 
 
-class PrivateKey:
+class AbstractKey:
+
+    __slots__ = (
+        'n',
+        'e'
+    )
+
+    def __init__(self, n, e):
+        self.n = n
+        self.e = e
+
+    def blind(self, message, r):
+        return (message * pow(r, self.e, self.n)) % self.n
+
+    def unblind(self, blinded_message, r):
+        return (common.mod_inv(r, self.n) * blinded_message) % self.n
+
+
+class PrivateKey(AbstractKey):
 
     __slots__ = (
         'n',        # pq
@@ -25,8 +43,7 @@ class PrivateKey:
     )
 
     def __init__(self, n, e, d, p, q):
-        self.n = n
-        self.e = e
+        super().__init__(n, e)
         self.d = d
         self.p = p
         self.q = q
@@ -42,15 +59,23 @@ class PrivateKey:
     def __getitem__(self, key):
         return getattr(self, key)
 
-    def encrypt(self, message):
-        ciphertext = rsa_int.encrypt_int(message, self.d, self.n)
-        return ciphertext
+    def encrypt_with_blind(self, message):
+        r = number.getRandomNBitInteger(self.n.bit_length() - 1)
+        blinded_message = self.blind(message, r)
+        ciphertext = rsa_int.encrypt_int(blinded_message, self.d, self.n)
 
-    def decrypt(self, ciphertext, crt=True):
+        return self.unblind(ciphertext, r)
+
+    def decrypt_with_blind(self, ciphertext, crt=True):
+        r = number.getRandomNBitInteger(self.n.bit_length() - 1)
+        blinded_ciphertext = self.blind(ciphertext, r)
+
         if crt:
-            return self._decrypt_crt(ciphertext)
+            message = self._decrypt_crt(blinded_ciphertext)
         else:
-            return self._decrypt_simple(ciphertext)
+            message = self._decrypt_simple(blinded_ciphertext)
+
+        return self.unblind(message, r)
 
     def _decrypt_simple(self, ciphertext):
         message = rsa_int.decrypt_int(ciphertext, self.d, self.n)
@@ -75,20 +100,17 @@ class PrivateKey:
         return key_bytes
 
 
-class PublicKey:
+class PublicKey(AbstractKey):
+
     __slots__ = (
         'n',  # pq
         'e',  # prime that is coprime with phi_n
     )
 
     def __init__(self, n, e):
-        self.n = n
-        self.e = e
+        super().__init__(n, e)
 
         log.debug("PublicKey ready")
-
-    def __getitem__(self, key):
-        return getattr(self, key)
 
     def __getstate__(self):
         return self.n, self.e
