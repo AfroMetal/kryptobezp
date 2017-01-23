@@ -2,8 +2,8 @@ import sys
 
 from Crypto.Hash import SHA256
 
-from list8.common import byte_size
-from list8.key import PublicKey, PrivateKey
+from common import byte_size
+from key import PublicKey, PrivateKey
 
 
 def encrypt(message, public_key):
@@ -39,7 +39,7 @@ def decrypt(ciphertext, private_key, crt=True):
 
     for part in parts:
         int_part = int.from_bytes(part, byteorder=sys.byteorder)
-        decrypted = private_key.decrypt(int_part, crt=crt)
+        decrypted = private_key.decrypt_with_blind(int_part, crt=crt)
         block = decrypted.to_bytes(length, byteorder=sys.byteorder)
         message = b''.join([message, block])
 
@@ -61,7 +61,7 @@ def sign(message, private_key):
 
     for part in parts:
         int_part = int.from_bytes(part, byteorder=sys.byteorder)
-        encrypted = private_key.encrypt(int_part)
+        encrypted = private_key.encrypt_with_blind(int_part)
         block = encrypted.to_bytes(length, byteorder=sys.byteorder)
         signature += block
 
