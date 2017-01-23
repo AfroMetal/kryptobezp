@@ -1,4 +1,4 @@
-from list8 import common
+import common
 
 
 def assert_all_int(variables, names):
